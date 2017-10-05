@@ -1,0 +1,14 @@
+{% if all_albums %}
+  <h3>List of Albums</h3>
+    <ul>
+        {% for album in all_albums %}
+        <!-- Tut 20 <li><a href="/music/{{album.id}}/">{{album.album_tittle}}</a> </li> -->
+        <li><a href="{% url 'music:detail' album.id %}">{{album.album_tittle}}</a>
+
+            <img src = {{album.album_logo}} class="img-thumbnail" width="50" height="50" >
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>You don't have any albums</h3>
+{% endif%}

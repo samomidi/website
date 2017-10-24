@@ -1,32 +1,22 @@
+{% extends 'music/base.html' %}
+{% block tittle %}
+Album Details
+{% endblock %}
+
+{% block body %}
 <img src="{{album.album_logo}}">
 
 <h1>{{ album.album_tittle}}</h1>
 <h3>{{album.artist }}</h3>
 
 
-{% if error_message %}
-    <p><strong>{{error_message}}</strong></p>
-{% endif %}
-
-<form action="{% url 'music:favorite' album.id %}" method="POST">
-     {% csrf_token %}
     {% for song in album.song_set.all %}
-        <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}"/>
-        <label for="song{{ forloop.counter }}">
+
             {{ song.song_tittle }}
             {% if song.is_favorite %}
                 <img src="https://assets.bonanzastatic.com/images/product_review/full_star_small.png" />
             {% endif %}
-        </label><br>
+        <br>
     {% endfor %}
-    <input type="submit" value="Favorite">
 
-</form>
-
-<!-- Tut 23 to add Fav
-<u1>
-    {% for item in album.song_set.all %}
-    <li> {{item.song_tittle }} - {{item.file_type}} </li>
-    {% endfor %}
-</u1>
--->
+{% endblock %}
